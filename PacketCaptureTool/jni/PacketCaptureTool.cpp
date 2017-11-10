@@ -155,8 +155,7 @@ void* capture_thread(void* arg)
 		//printf("wakeup the capture!\n");
 		//recv_len = recv(sock_fd, ppkt_start, PKT_MAX_LEN, MSG_DONTWAIT);
 		recv_len = recvfrom(sock_fd, buffer, PKT_MAX_LEN, 0, NULL, NULL);
-		FILE *p1;
-		int fexist;
+
 		if(recv_len < 46)
 		{
 			/*if(errno != EAGAIN)
@@ -169,7 +168,7 @@ void* capture_thread(void* arg)
 		}
 		//usleep(10000);
 
-		/*获取一条数据帧的源ip地址，目的ip地址，源端口和目的端口
+		/*获取一条数据帧的源ip地址，目的ip地址，源端口和目的端口*/
 		ip_header = (const struct ip_hdr*)(buffer+14);
 		ip_src_addr = ip_header->ip_src_addr;
 		ip_dest_addr = ip_header->ip_dest_addr;
@@ -180,7 +179,7 @@ void* capture_thread(void* arg)
 
 		//printf("at the start,ip_src_addr: %X, ip_dest_addr: %X, tcp_src_port: %X, tcp_dest_port: %X\n",ip_src_addr,ip_dest_addr,tcp_src_port,tcp_dest_port);
 
-		查找tcp6,tcp,udp,udp6快照记录
+		/*查找tcp6,tcp,udp,udp6快照记录*/
 		unsigned int rd_lo_ip_addr;
 		unsigned short rd_lo_port;
 		int uid = -1;
@@ -441,7 +440,7 @@ void* capture_thread(void* arg)
 			sprintf(file_name, "%s/%s.%s", savedir1, fname1, PCAP_FILE_SUFFIX);
 		}
 
-		针对获取的UID，找不到对应的应用名称
+		/*针对获取的UID，找不到对应的应用名称*/
 		if(fname[0] == 0){
 			//printf("Can't find the filename for UID!\n");
 			//return errno;如何进行程序错误控制
@@ -449,7 +448,7 @@ void* capture_thread(void* arg)
 			sprintf(file_name, "%s/%s.%s", savedir1, fname1, PCAP_FILE_SUFFIX);
 		}
 		//printf("file_name=:%s\n",fname);
-		若文件不存在，则记录为0，否则记录为1*/
+		/*若文件不存在，则记录为0，否则记录为1*/
 		if((p1 = fopen(file_name, "rb")) == NULL)
 			fexist = 0;
 		else
@@ -458,7 +457,7 @@ void* capture_thread(void* arg)
 			fclose(p1);
 
 		//printf("fexist=:%d\n",fexist);
-		//创建对应的pcap文件
+		/* 创建对应的pcap文件 */
 		file = fopen(file_name, "ab+");
 		if(NULL == file)
 		{
@@ -467,7 +466,7 @@ void* capture_thread(void* arg)
 			break;
 		}
 		if(fexist == 0){
-			//写入文件头
+			/* 写入文件头 */
 			need_write_len = sizeof(struct pcap_file_header);
 			if( fwrite(&file_header, sizeof(char), need_write_len, file) < need_write_len)
 			{
@@ -610,13 +609,13 @@ int start_capture(char* dev, int proto, int cap_len, char* saveFileName)
 	/* 初始化pcap文件头 */
 	init_file_header(&file_header, cap_len);
 
-	// 生成文件名
+	/* 生成文件名
 	time(&time_now);
 	struct tm* now = localtime(&time_now);
 	now->tm_year += 1900;
 
-	sprintf(file_name, "%s/%04d%02d%02d%02d%02d%02d.%s", savedir, now->tm_year, now->tm_mon+1, now->tm_mday, now->tm_hour, now->tm_min, now->tm_sec, PCAP_FILE_SUFFIX);
-
+	sprintf(file_name, "%s/%04d%02d%02d%02d%02d%02d.%s", saveDir, now->tm_year, now->tm_mon+1, now->tm_mday, now->tm_hour, now->tm_min, now->tm_sec, PCAP_FILE_SUFFIX);
+	*/
 
 	/*sprintf(file_name, "%s/%s.%s", saveDir, saveFileName, PCAP_FILE_SUFFIX);
 
@@ -1207,11 +1206,11 @@ int main(int argc, char* argv[])
 			AppMsg->appnm = "";
 		}*/
 
-		/*FILE *readid = fopen("/storage/emulated/0/i_record/appuid.txt","r");
+		FILE *readid = fopen("/storage/emulated/0/i_record/appuid.txt","r");
         FILE *readname = fopen("/storage/emulated/0/i_record/appname.txt","r");
 
 		//printf("fopen file success!\n");
-		读取文件中保存的应用信息记录
+		/*读取文件中保存的应用信息记录*/
 		i = 0;
 		while(!feof(readid) && !feof(readname))
 		{
@@ -1221,7 +1220,7 @@ int main(int argc, char* argv[])
 			i++;
 		}
 		fclose(readid);
-		fclose(readname);*/
+		fclose(readname);
 
 		app_msg_len = i;
 //		for(i = 0; i <= app_msg_len; i++)
@@ -1236,11 +1235,11 @@ int main(int argc, char* argv[])
 		//printf("start capture, wait stop signal!\n");
         __android_log_print(ANDROID_LOG_INFO, "sprintwind", "in child process, pid:%d", getpid());
 
-        /*if(0 != pthread_create(&thread_id3, NULL, tcpinfo, NULL))
+        if(0 != pthread_create(&thread_id3, NULL, tcpinfo, NULL))
         {
         	//printf("Create pthread3 error!\n");
         	return -1;
-        }*/
+        }
         //printf("enter start capture!\n");
 		if( start_capture(argv[1], proto, atoi(argv[3]), argv[5]) != 0)
 		{
