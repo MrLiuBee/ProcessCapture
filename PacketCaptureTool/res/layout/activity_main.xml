@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnrlytMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.sprintwind.packetcapturetool.MainActivity" >
+    
+    <RelativeLayout
+           android:id="@+id/appx_banner_container" 
+           android:layout_width="match_parent" 
+           android:layout_height="wrap_content"
+           android:layout_gravity="top"
+           >
+   	</RelativeLayout>
+    
+    <fragment
+        android:id="@+id/frgmntCapture"
+        android:name="com.sprintwind.packetcapturetool.CaptureActivity"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7" />
+    
+    <fragment
+        android:id="@+id/frgmntAnalyze"
+        android:name="com.sprintwind.packetcapturetool.AnalyzeActivity"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+		android:layout_weight="7"
+        />
+    
+    <fragment
+        android:id="@+id/frgmntMore"
+        android:name="com.sprintwind.packetcapturetool.MoreActivity"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+         />
+    
+    <View  
+	   android:layout_width="fill_parent"  
+	   android:layout_height="1px" 
+	   android:background="?android:attr/listDivider"  
+	/> 
+    
+    <RelativeLayout 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        
+        <RadioGroup  
+        android:id="@+id/rdgrpBottomMenu"  
+        android:layout_width="fill_parent"  
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >  
+  
+        <RadioButton  
+            android:id="@+id/rdbttnCapture"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_action_capture"
+            style="@style/rdbtnStyleRed"
+            android:checked="true"  
+            android:text="@string/capture" />  
+  
+        <RadioButton  
+            android:id="@+id/rdbttnAnalyze"  
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_action_analyze"
+            style="@style/rdbtnStyleRed"
+            android:text="@string/analyze" />
+        
+        <RadioButton  
+            android:id="@+id/rdbttnMore"  
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_action_more"
+            style="@style/rdbtnStyleRed"
+            android:text="@string/more" /> 
+   
+    	</RadioGroup>
+    </RelativeLayout>
+    
+   
+</LinearLayout>

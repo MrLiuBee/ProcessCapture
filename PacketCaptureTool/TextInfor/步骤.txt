@@ -1,0 +1,80 @@
+进入G:\android-sdk\platform-tools
+adb shell
+cd data/user/0/com.sprintwind.packetcapturetool
+
+su权限
+
+./cap_tool all ALL 262144 /storage/emulated/0/packet_capture test
+
+
+iptables -A OUTPUT -m owner --uid-owner 500
+
+13910271282
+
+
+Bus 001 Device 004: ID 2717:ff68
+
+
+Spark的启停、跑着哪些任务，哪些任务在排队
+
+sudo sh -c "echo deb https://get.docker.io/ubuntu docker main\
+> /etc/apt/sources.list.d/docker.list"
+
+
+sudo apt-get install linux-image-generic-lts-raring linux-headers-generic-lts-raring
+
+
+
+
+-h指定容器运行起来后的hostname
+docker run --name cloud1 -h cloud1 -it jchubby/spark:1.0
+...
+docker run --name cloud6 -h cloud6 -it jchubby/spark:1.0
+#在cloud5~cloud6中分别手动修改myid
+echo 2 > ~/zookeeper/tmp/myid
+echo 3 > ~/zookeeper/tmp/myid
+
+
+./bin/spark-submit --master spark://172.17.0.2:7077 examples/src/main/python/pi.py 10
+
+
+./spark-submit --num-executors 1 /root/spark/examples/src/main/python/pi.py 50
+
+
+./bin/spark-submit --class org.apache.spark.examples.JavaTC --master spark://master:7077 /home/lch/JavaTC.jar
+
+
+
+curl --compressed -H "Accept: application/json" -X GET "http://172.17.0.2:4040/api/v1"
+
+curl --compressed -H "Accept: application/json" -X GET "http://172.17.0.2:4040/jobs"
+
+curl --compressed -H "Accept: application/json" -X GET "http://172.17.0.2:8080/ws/v1/cluster/apps/app-20170824163802-0002"
+
+curl -i http://master:4040/api/v1/applications/AppID/jobs      -----获取某个应用的Job Id
+
+
+curl -i http://master:4040/api/v1/applications    -----获取某个正在运行应用的AppId等信息
+
+
+curl -i http://master:4040/api/v1/applications/AppId/stages  ----获取某个应用的Stages信息
+
+
+杀掉某个Job，即杀掉某个应用程序：
+curl -X POST http://master:4040(或其他端口)/jobs/job/kill/?id=0(或者其他)
+
+
+/root/hadoop/tmp
+
+hadoop/tmp/dfs/name
+
+
+
+实时任务和定时任务
+
+
+
+
+
+
+

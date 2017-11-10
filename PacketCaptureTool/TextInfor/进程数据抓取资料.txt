@@ -1,0 +1,48 @@
+Android ROOT 防火墙
+Socket申请服务时，防火墙可以获取socket进程的端口号
+
+Droidwall
+
+Android应用进程网络通信的详细过程，Socket的通信过程。
+
+应用进程网络通信端口分配过程：
+http://blog.csdn.net/whui19890911/article/details/8695454
+http://www.jobui.com/mianshiti/it/wangluojishu/3579/
+http://blog.sina.com.cn/s/blog_72a9e4190101j1ov.html
+http://book.51cto.com/art/201204/330956.htm
+
+应用进程通信时的端口时动态分配的：
+    动态端口不固定分配某种服务而动态分配的端口，动态分配是指当一个系统进程或应用程序进程需要网络通信时，它向主机申请一个端口，主机从可用的端口号中分配 一个供它使用。当这个进程关闭时，同时也就释放了所占用的端口号。
+动态端口的范围是从1024到65535。
+
+
+
+范例 iptables -A OUTPUT -m owner --uid-owner 500
+说明 用来比对来自本机的封包，是否为某特定使用者所产生的，这样可以避免服务器使用 root 或其它身分将敏感数据传送出去，可以降低系统被骇的损失。可惜这个功能无法比对出来自其它主机的封包。
+
+Iptables如何根据UID区分数据封包是否来自该应用
+
+下面给出一个完整的实例：
+iptables -t filter -A OUTPUT -o wlan+ -m owner --uid-owner 10042 -j DROP
+
+说明：操作filter（-t filter可以省略，默认操作filter表）的OUTPUT链，封包来源是wlan+，并且来源是uid为10042的，丢弃数据包。
+
+
+http://seanlook.com/2014/02/23/iptables-understand/
+
+
+如何获取应用进程与端口的绑定关系。
+
+iptable如何根据UID筛选数据报
+
+
+Android通用流行框架大全：
+https://segmentfault.com/a/1190000005073746
+
+
+
+限速tcp,QOS,令牌桶，一秒钟100个包，
+通过丢包方式
+丢包率和真正流量的传输速率的关系（如何可以计算出它们之间的关系，提供算法依据）
+
+
