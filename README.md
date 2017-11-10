@@ -1,0 +1,2 @@
+# ProcessCapture
+用于Android平台的进程级数据流量抓取，手机需要Root权限，抓取的数据包保存在手机根目录的packet_captuer文件夹内.
